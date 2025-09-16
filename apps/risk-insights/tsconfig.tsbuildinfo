@@ -1,0 +1,1 @@
+{"root":["./src/main.tsx","./src/features/charts/charts.tsx","./src/features/filters/filters.tsx","./src/features/map/ctmap.tsx","./src/features/presets/savedviews.tsx","./src/features/table/claimstable.tsx","./src/lib/exportimage.ts","./src/lib/exportreport.ts","./src/lib/formatfilters.ts","./src/lib/store.ts","./src/lib/types.ts","./src/routes/dashboard.tsx"],"version":"5.9.2"}

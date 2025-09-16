@@ -1,0 +1,241 @@
+
+:root {
+  --bg: #0b0e13;
+  --panel: #12161d;
+  --text: #e6e8eb;
+  --muted: #9aa4b2;
+  --accent: #6295ff;
+  --border: #1e2430;
+  --ring: #6ea0ff;
+  --shadow: 0 8px 20px rgba(0,0,0,.35);
+}
+[data-theme="light"] {
+  --bg: #f6f8fb;
+  --panel: #ffffff;
+  --text: #111317;
+  --muted: #5a6573;
+  --accent: #294eff;
+  --border: #e6e9ef;
+  --ring: #6ea0ff;
+  --shadow: 0 8px 20px rgba(15,25,35,.08);
+}
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;
+  background: var(--bg);
+  color: var(--text);
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+}
+.grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 960px) { .grid { grid-template-columns: 1.2fr 1fr; } }
+.hstack { display: flex; gap: 8px; align-items: center; }
+.vstack { display: flex; gap: 8px; flex-direction: column; }
+.btn {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.btn[aria-pressed="true"] { outline: 2px solid var(--accent); }
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn.primary { background: var(--accent); color: white; border-color: transparent; }
+.input, select {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+.focus-ring:focus { outline: 2px solid var(--ring); outline-offset: 2px; }
+.badge { padding: 2px 8px; border-radius: 999px; border:1px solid var(--border); color: var(--muted); }
+.badge .x { border: none; background: none; color: var(--muted); cursor: pointer; padding: 0 2px; line-height: 1; }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+
+
+/* table polish */
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { border-bottom: 1px solid var(--border); padding: 10px; text-align: left; }
+.table th { position: sticky; top: 0; background: var(--panel); z-index: 1; }
+.table tbody tr:nth-child(odd) { background: color-mix(in srgb, var(--panel) 92%, #fff 8%); }
+
+.focus-ring:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+.skip-link {
+  position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden;
+}
+.skip-link:focus { position: static; width: auto; height: auto; padding: 6px 8px; }
+
+/* chart containers */
+figure.panel { padding: 8px 12px 4px; }
+figcaption { color: var(--muted); margin: 4px 0 8px; font-size: 14px; }
+
+/* Skeleton shimmer */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--panel) 86%, #fff 14%);
+  border-radius: 8px;
+}
+.skeleton::after {
+  content: "";
+  position: absolute; inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--panel) 70%, #fff 30%),
+    transparent
+    );
+    animation: shimmer 1.2s infinite;
+}
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+
+/* Empty state */
+.empty {
+  display: grid; place-items: center;
+  min-height: 160px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* --- Filters toolbar layout --- */
+.toolbar{
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap:12px;
+  align-items:end;
+}
+
+.field{ grid-column: span 3; }
+.field--grow{ grid-column: span 12; } /* counties block expands full width */
+
+.field label{
+  display:block;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:4px;
+}
+
+hr.subtle{
+  border:none;
+  border-top:1px solid var(--border);
+  margin-top:12px;
+}
+
+/* --- Counties selected chips --- */
+.chiprow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:6px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex-basis: 100%;
+  width: 100%
+  margin-top: 8px;
+  align-items: center;
+}
+
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:4px 10px;
+  background: color-mix(in srgb, var(--panel) 88%, #fff 12%);
+  border:1px solid var(--border);
+  border-radius:999px;
+  font-size:13px;
+  line-height: 1;
+  color:var(--text);
+  box-shadow: var(--shadow, 0 0 0 rgba(0,0,0,0));
+}
+.chip button{
+  border:none;
+  background:transparent;
+  color:var(--muted);
+  cursor:pointer;
+  line-height:1;
+}
+.chip:hover{ border-color: color-mix(in srgb, var(--border) 50%, var(--accent) 50%); }
+
+.chip__x {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  border-radius: 6px;
+}
+.chip__x:hover { color: var(--text); }
+.chip__x:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+/* Clear link next to chips */
+.chips__clear {
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 13px;
+  padding: 2px 4px;
+  border-radius: 6px;
+}
+.chips__clear:hover { text-decoration: underline; }
+.chips__clear:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+/* force chips under counties */
+.counties-list + .chip,
+.counties-list + .chips {
+  display: block;
+  margin-top: 10px;
+}
+
+/* button-styled links (for small actions like Clear) */
+.link{
+  border:none;
+  background:transparent;
+  color:var(--accent);
+  cursor:pointer;
+  font-size:12px;
+  padding:0 .25rem;
+}
+.link:focus-visible{ outline:2px solid var(--ring); outline-offset:2px; }
+.link.icon{display:inline-flex; align-items:center; gap:6px}
+.link.icon .i{font-size:normal; opacity:.8}
+.link.icon:hover .i{opacity:1}
+
+/* tiny card styles */
+.card{background:var(--panel); border:1px solid var(--border); border-radius:10px}
+.card__head{display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-bottom:1px solid var(--border)}
+.card__head figcaption{font-weight:600; letter-spacing:.2px}
+.card__body{padding:8px 12px 12px}
+figcaption{font-weight:600; color:var(--text)}
+.card__actions{display:flex; align-items:center; gap:8px}
+.card__actions .link{border:none; background:transparent; color:var(--accent); cursor:pointer; font-size:12px; margin-left:10px}
+.card__actions .link:focus-visible{outline:2px solid var(--ring); outline-offset:2px}
+
+.muted{ color: var(--muted); }
+
+/* Multi-select quality-of-life */
+select[multiple]{
+  min-height: 120px;
+  width: 100%;
+}
+@media (max-width: 920px){
+  .field{ grid-column: span 6; }
+  .field--grow{ grid-column: span 12; }
+}
