@@ -1,0 +1,24 @@
+
+{
+  "name": "hartford-risk-insights-monorepo",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm --filter risk-insights dev",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "format": "prettier -w ."
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  },
+  "pnpm": {
+    "packageImportMethod": "copy"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
